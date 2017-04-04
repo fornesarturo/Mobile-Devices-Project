@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/pending_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/calendioli_event_description"
+        android:text="TextView"
+        android:textAppearance="@android:style/TextAppearance.Material.Large" />
+
+    <TextView
+        android:id="@+id/pending_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        android:layout_below="@+id/pending_title"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/pending_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/pending_date"
+        android:layout_marginTop="14dp"
+        android:text="TextView"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium" />
+
+</RelativeLayout>
