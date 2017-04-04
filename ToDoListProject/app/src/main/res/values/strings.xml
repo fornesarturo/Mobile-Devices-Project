@@ -3,4 +3,5 @@
     <string name="checklist_list">Checklists</string>
     <string name="places">Places</string>
     <string name="calendar">Calendar</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
