@@ -1,38 +1,50 @@
 package watsalacanoa.todolisttest;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.AdapterView;
+import android.widget.ListView;
+
+import com.google.android.gms.maps.model.LatLng;
+
+import java.util.ArrayList;
+
+import watsalacanoa.todolisttest.mapitas.Placioli;
+import watsalacanoa.todolisttest.mapitas.PlacioliAdapter;
 
 public class Places extends AppCompatActivity {
 
-    Button home;
-    TextView title;
-    EditText note1;
+    private ArrayList<Placioli> placesTest;
+    private ListView places;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_places);
 
-        title = (TextView) findViewById(R.id.places_textView);
-        home = (Button) findViewById(R.id.places_button);
-        note1 = (EditText) findViewById(R.id.places_editText);
-        title.setText("Places");
-        home.setText("Home");
-        note1.setText("Place 1");
-    }
+        placesTest = new ArrayList<>();
+        placesTest.add(new Placioli("A", "B", new LatLng(20, 100)));
+        placesTest.add(new Placioli("C", "D", new LatLng(-10, -10)));
+        placesTest.add(new Placioli("Teenage", "Mutant", new LatLng(-20, 20)));
+        placesTest.add(new Placioli("Ninja", "Turtles", new LatLng(30, -40)));
 
-    public void goHome(View v){
-        Intent i = new Intent();
-        i.putExtra("message","You visited Places");
-        setResult(Activity.RESULT_OK,i);
-        finish();
+        places = (ListView)findViewById(R.id.lvPlaces);
+        final PlacioliAdapter adapterTest = new PlacioliAdapter(placesTest, this);
+        places.setAdapter(adapterTest);
+        places.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Placioli currentPlacioli = adapterTest.getItem(position);
+                Intent i = new Intent(getApplicationContext(), MapsActivity.class);
+                Bundle loQueSeMePegaLaGana = new Bundle();
+                loQueSeMePegaLaGana.putParcelable("latLng", currentPlacioli.getLatLng());
+                i.putExtra("bundle", loQueSeMePegaLaGana);
+                startActivity(i);
+            }
+        });
     }
 }
 
