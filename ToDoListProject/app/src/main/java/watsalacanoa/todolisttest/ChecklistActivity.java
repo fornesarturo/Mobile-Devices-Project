@@ -98,7 +98,7 @@ public class ChecklistActivity extends AppCompatActivity {
                 .getParcelable(NoteContentProvider.CONTENT_ITEM_TYPE);
 
         mActionBar = getSupportActionBar();
-        View view = getLayoutInflater().inflate(R.layout.note_actionbar, null);
+        View view = getLayoutInflater().inflate(R.layout.actionbar_note, null);
 
         mActionBar.setDisplayShowTitleEnabled(false);
         mActionBar.setCustomView(view);
@@ -255,7 +255,7 @@ public class ChecklistActivity extends AppCompatActivity {
 
     public AlertDialog.Builder getDialog() {
         LayoutInflater li = LayoutInflater.from(this);
-        LinearLayout newNoteBaseLayout = (LinearLayout) li.inflate(R.layout.new_item_dialog, null);
+        LinearLayout newNoteBaseLayout = (LinearLayout) li.inflate(R.layout.dialog_new_item, null);
         mNewItemText = (EditText) newNoteBaseLayout.getChildAt(0);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {

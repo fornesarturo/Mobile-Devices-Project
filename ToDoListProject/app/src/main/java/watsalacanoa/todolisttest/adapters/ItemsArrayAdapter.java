@@ -33,7 +33,7 @@ public class ItemsArrayAdapter extends ArrayAdapter<String> {
 
     public ItemsArrayAdapter
             (ChecklistActivity context, ArrayList<String> arrayList, boolean slashes){
-        super(context, R.layout.item_row,arrayList);
+        super(context, R.layout.row_item,arrayList);
         mContext = context;
         mArrayList = arrayList;
         mChecklistActivity = context;
@@ -45,7 +45,7 @@ public class ItemsArrayAdapter extends ArrayAdapter<String> {
         ViewHolder holder;
 
         if(convertView == null){
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.item_row, parent, false);
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.row_item, parent, false);
             holder = new ViewHolder();
 
             holder.itemName = (TextView)convertView.findViewById(R.id.itemText);

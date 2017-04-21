@@ -22,7 +22,6 @@ import android.os.Bundle;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -134,7 +133,7 @@ public class Notioli extends AppCompatActivity {
     public AlertDialog.Builder getDialog() {
         final SQLiteDatabase db = mNotioliHelper.getWritableDatabase();
         LayoutInflater li = LayoutInflater.from(this);
-        LinearLayout newNoteBaseLayout = (LinearLayout) li.inflate(R.layout.new_item_dialog, null);
+        LinearLayout newNoteBaseLayout = (LinearLayout) li.inflate(R.layout.dialog_new_item, null);
         mNewItemText = (EditText) newNoteBaseLayout.getChildAt(0);
         mNewItemText.setText(pastNotioliText);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

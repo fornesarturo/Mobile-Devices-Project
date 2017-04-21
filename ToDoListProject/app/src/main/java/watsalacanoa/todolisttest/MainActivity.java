@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             mainActionBar = getSupportActionBar();
         }
 
-        View view = getLayoutInflater().inflate(R.layout.highlight_actionbar, null);
+        View view = getLayoutInflater().inflate(R.layout.actionbar_highlight, null);
         if(mainActionBar.getCustomView() == null) {
 
             mainActionBar.setCustomView(view);

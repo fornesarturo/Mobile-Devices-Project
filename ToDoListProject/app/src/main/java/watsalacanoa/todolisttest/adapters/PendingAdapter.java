@@ -46,7 +46,7 @@ public class PendingAdapter extends BaseAdapter {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Pending currentPending = this.data.get(position);
         if(convertView == null) {
-            convertView = activity.getLayoutInflater().inflate(R.layout.pending_row, null);
+            convertView = activity.getLayoutInflater().inflate(R.layout.row_pending, null);
         }
 
         TextView date = (TextView) convertView.findViewById(R.id.pending_date);
