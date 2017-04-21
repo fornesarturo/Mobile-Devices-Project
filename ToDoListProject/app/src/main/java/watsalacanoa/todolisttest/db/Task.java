@@ -5,13 +5,16 @@ import android.util.Log;
 
 public class Task {
 
+    // TASKS INFO ///////////
+    /////////////////////////
     public static final String TABLE_NOTE = "tasks";
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_ITEMS = "items";
     public static final String COLUMN_SLASHED = "slashed";
     public static final String COLUMN_NOTE_TITLE = "noteTitle";
 
-    ////////////////////////////////////////////
+    // NOTIOLI INFO /////////
+    /////////////////////////
     public static final String TABLE_NOTIOLI = "notioli";
     public static final String NOTIOLI_COLUMN_ID = "_id";
     public static final String NOTIOLI_COLUMN_TITLE = "title";
@@ -27,6 +30,13 @@ public class Task {
     public static final String CALENDIOLI_TITLE = "title";
     public static final String CALENDIOLI_EVENT = "event";
 
+    // PLACIOLI INFO ////////
+    /////////////////////////
+    public static final String TABLE_PLACIOLI = "placioli";
+    public static final String PLACIOLI_ID = "_id";
+
+
+    //////////////////////////////////////////////////////
     private static final String CALENDIOLI_CREATE = "CREATE TABLE "
             + TABLE_CALENDIOLI
             + "("
@@ -45,15 +55,18 @@ public class Task {
             + COLUMN_NOTE_TITLE + " TEXT NOT NULL, "
             + COLUMN_ITEMS + " TEXT NOT NULL"
             + ");";
-            ////////////////////////////////////////////
-            ////////////////////////////////////////////
-    private static final String NOTIOLI_CREATE = " CREATE TABLE "
+    ////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////
+    private static final String NOTIOLI_CREATE = "CREATE TABLE "
                     + TABLE_NOTIOLI
                     + "("
                     + NOTIOLI_COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                     + NOTIOLI_COLUMN_TITLE + " TEXT NOT NULL, "
                     + NOTIOLI_COLUMN_IMAGE + " TEXT"
                     + ");";
+
+    private static final String PLACIOLI_CREATE = "CREATE TABLE"
+            +
 
     public static void onCreate(SQLiteDatabase db){
         db.execSQL(DATABASE_CREATE);

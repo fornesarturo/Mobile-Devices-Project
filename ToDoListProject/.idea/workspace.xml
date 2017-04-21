@@ -90,22 +90,24 @@
       <file leaf-file-name="PlacioliDialogBuilder.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/watsalacanoa/todolisttest/placioliStuff/PlacioliDialogBuilder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="53" column="13" selection-start-line="53" selection-start-column="13" selection-end-line="53" selection-end-column="13" />
+            <state relative-caret-position="258">
+              <caret line="39" column="8" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="8" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1077#1078#0" expanded="true" />
-                <element signature="e#1121#1122#0" expanded="true" />
+                <element signature="e#2007#2831#0" expanded="true" />
+                <element signature="e#2830#2831#0" expanded="true" />
+                <element signature="e#2861#3104#0" expanded="true" />
+                <element signature="e#3103#3104#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CalendioliDialogBuilder.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/watsalacanoa/todolisttest/caldroidStuff/CalendioliDialogBuilder.java">
+      <file leaf-file-name="Task.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/watsalacanoa/todolisttest/db/Task.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="50" column="34" selection-start-line="50" selection-start-column="34" selection-end-line="50" selection-end-column="34" />
+            <state relative-caret-position="290">
+              <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -1727,7 +1729,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="4478372642016" />
+        <entry key="$PROJECT_DIR$" value="4478375938166" />
         <entry key="C:\Users\MiguelAngel\Documents\GitHub\Mobile-Devices-Project\ToDoListProject" value="4473774622264" />
         <entry key="C:\Users\spide\AndroidStudioProjects\TodoListProject-master\ToDoListProject" value="4469282850000" />
         <entry key="C:\Users\spide\OneDrive\Documentos\GitHub\Mobile-Devices-Project\ToDoListProject" value="4474003207816" />
@@ -2050,7 +2052,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/watsalacanoa/todolisttest/adapters/CalendioliAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_calendioli_event.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/watsalacanoa/todolisttest/caldroidStuff/CalendioliDialogBuilder.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/watsalacanoa/todolisttest/db/Task.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/watsalacanoa/todolisttest/caldroidStuff/CalendioliEvent.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_calendar.xml" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
@@ -2065,6 +2066,7 @@
         <option value="$PROJECT_DIR$/app/src/main/java/watsalacanoa/todolisttest/Places.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/dialog_placioli.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/watsalacanoa/todolisttest/Calendioli.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/watsalacanoa/todolisttest/db/Task.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/watsalacanoa/todolisttest/placioliStuff/PlacioliDialogBuilder.java" />
       </list>
     </option>
@@ -2214,6 +2216,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="objects" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ToDoListProject" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="todolisttest" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="db" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -2829,13 +2853,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/watsalacanoa/todolisttest/db/Task.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="31" column="17" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/watsalacanoa/todolisttest/db/TaskHelper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -3084,22 +3101,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/watsalacanoa/todolisttest/caldroidStuff/CalendioliDialogBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="50" column="34" selection-start-line="50" selection-start-column="34" selection-end-line="50" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/watsalacanoa/todolisttest/Calendioli.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="628">
-          <caret line="93" column="30" selection-start-line="93" selection-start-column="30" selection-end-line="93" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/watsalacanoa/todolisttest/Places.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
@@ -3120,14 +3121,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/watsalacanoa/todolisttest/caldroidStuff/CalendioliDialogBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="57" column="29" selection-start-line="57" selection-start-column="29" selection-end-line="57" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/watsalacanoa/todolisttest/Calendioli.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="628">
+          <caret line="93" column="30" selection-start-line="93" selection-start-column="30" selection-end-line="93" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/watsalacanoa/todolisttest/db/Task.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/watsalacanoa/todolisttest/placioliStuff/PlacioliDialogBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="53" column="13" selection-start-line="53" selection-start-column="13" selection-end-line="53" selection-end-column="13" />
+        <state relative-caret-position="258">
+          <caret line="39" column="8" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="8" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1077#1078#0" expanded="true" />
-            <element signature="e#1121#1122#0" expanded="true" />
+            <element signature="e#2007#2831#0" expanded="true" />
+            <element signature="e#2830#2831#0" expanded="true" />
+            <element signature="e#2861#3104#0" expanded="true" />
+            <element signature="e#3103#3104#0" expanded="true" />
           </folding>
         </state>
       </provider>

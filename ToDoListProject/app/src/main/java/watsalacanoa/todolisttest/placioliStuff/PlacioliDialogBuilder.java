@@ -33,9 +33,11 @@ public class PlacioliDialogBuilder extends DialogFragment {
     private TextView tvLat;
     private TextView tvLng;
     private LatLng locationLatLng;
+    private String titlePlace;
 
     public void setLatLng(LatLng latLng) {
         this.locationLatLng = latLng;
+        
     }
 
     @Override
@@ -53,15 +55,14 @@ public class PlacioliDialogBuilder extends DialogFragment {
         this.tvLat = (TextView) view.findViewById(R.id.tvLatDialog);
         this.tvLng = (TextView) view.findViewById(R.id.tvLngDialog);
 
-        tvDate.setText(this.dateText);
-        Toast.makeText(getActivity(), "DATE: " + dateText, Toast.LENGTH_SHORT).show();
-        Log.d("DB", "0");
+        this.tvLat.setText(this.locationLatLng.latitude+"");
+        this.tvLng.setText(this.locationLatLng.longitude+"");
+
         builder.setView(view)
                 .setPositiveButton("Create", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        title = etTitle.getText().toString();
-                        event = etEvent.getText().toString();
+                        titlePlace = etPlaceTitle.getText().toString();
                         SQLiteDatabase db = calendioliDB.getWritableDatabase();
                         ContentValues values = new ContentValues();
                         values.put(Task.CALENDIOLI_DATE, dateText);
@@ -72,10 +73,10 @@ public class PlacioliDialogBuilder extends DialogFragment {
                         db.close();
                     }
                 }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                CalendioliDialogBuilder.this.getDialog().cancel();
-            }
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    PlacioliDialogBuilder.this.getDialog().cancel();
+                }
         });
         return builder.create();
     }
