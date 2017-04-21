@@ -1,6 +1,7 @@
 package watsalacanoa.todolisttest;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,19 +12,28 @@ import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
 
-import watsalacanoa.todolisttest.mapitas.Placioli;
-import watsalacanoa.todolisttest.mapitas.PlacioliAdapter;
+import watsalacanoa.todolisttest.objects.Placioli;
+import watsalacanoa.todolisttest.adapters.PlacioliAdapter;
 
 public class Places extends AppCompatActivity {
 
     private ArrayList<Placioli> placesTest;
     private ListView places;
+    private FloatingActionButton addPlaceButton;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_places);
+
+        addPlaceButton = (FloatingActionButton) findViewById(R.id.fab_add_place);
+        addPlaceButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addPlace();
+            }
+        });
 
         placesTest = new ArrayList<>();
         placesTest.add(new Placioli("A", "B", new LatLng(20, 100)));
@@ -45,6 +55,10 @@ public class Places extends AppCompatActivity {
                 startActivity(i);
             }
         });
+    }
+
+    private void addPlace() {
+
     }
 }
 

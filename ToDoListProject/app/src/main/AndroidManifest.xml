@@ -51,8 +51,7 @@
             android:label="@string/places" />
         <activity android:name=".caldroidStuff.CalendioliEvent" />
         <activity android:name=".caldroidStuff.CalendioliPendings" />
-        <activity android:name=".mapitas.MapitasListView" />
-        <activity android:name=".mapitas.PlacioliAdapter" />
+        <activity android:name=".adapters.PlacioliAdapter" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

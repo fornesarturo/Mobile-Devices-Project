@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/etTitleDialogPlace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:hint="Place Name"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/tvLatDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:text="TextView"
+        tools:text="Lat: "
+        android:layout_below="@+id/etTitleDialogPlace"
+        android:layout_alignStart="@+id/etTitleDialogPlace" />
+
+    <TextView
+        android:id="@+id/tvLngDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tvLatDialog"
+        android:layout_below="@+id/tvLatDialog"
+        android:text="TextView"
+        tools:text="Lng:" />
+</RelativeLayout>

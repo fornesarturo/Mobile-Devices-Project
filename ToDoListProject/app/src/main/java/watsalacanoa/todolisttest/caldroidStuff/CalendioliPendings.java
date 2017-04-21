@@ -110,8 +110,6 @@ public class CalendioliPendings extends AppCompatActivity {
         ArrayList<Pending> data = new ArrayList<>();
 
         Cursor cursor = db.query(Task.TABLE_CALENDIOLI, null, null, null, null, null, null);
-        long prevTime = myDate.getTime();
-        boolean isFirstResult = true;
         while(cursor.moveToNext()){
             Date eventDate = null;
             try {
@@ -126,11 +124,16 @@ public class CalendioliPendings extends AppCompatActivity {
         }
         cursor.close();
 
+        if(data.size() > 0) {
+            noEvent.setVisibility(View.INVISIBLE);
+        }
+        else {
+            noEvent.setVisibility(View.VISIBLE);
+        }
+
         PendingAdapter adapter = new PendingAdapter(this, data);
         Log.d("SIZE", data.size()+"");
         eventList.setAdapter(adapter);
-
-        //Query BETWEEN date (parsear a DATE format) AND endDate (parsear a DATE format)
 
         db.close();
     }

@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="caldroid-3.0.1">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.android/build-cache/6a49177b60d74ba3c6b704aaa627d7375946d7b7/output/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.android/build-cache/6a49177b60d74ba3c6b704aaa627d7375946d7b7/output/res" />
+      <root url="jar://$USER_HOME$/.android/build-cache/c4b9cc6556ca3246206ea0f78cc4ab32703ff327/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/c4b9cc6556ca3246206ea0f78cc4ab32703ff327/output/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

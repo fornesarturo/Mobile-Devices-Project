@@ -1,4 +1,4 @@
-package watsalacanoa.todolisttest.caldroidStuff;
+package watsalacanoa.todolisttest.placioliStuff;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -15,42 +15,47 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import watsalacanoa.todolisttest.R;
+import watsalacanoa.todolisttest.caldroidStuff.CalendioliDialogBuilder;
 import watsalacanoa.todolisttest.db.Task;
 import watsalacanoa.todolisttest.db.TaskHelper;
 
 /**
- * Created by spide on 17/3/2017.
+ * Created by miguel on 21/04/17.
  */
 
-public class CalendioliDialogBuilder extends DialogFragment{
+public class PlacioliDialogBuilder extends DialogFragment {
 
-    private EditText etTitle,
-                     etEvent;
-    private TextView tvDate;
-    private String dateText;
-    private String title;
-    private String event;
-    private TaskHelper calendioliDB;
+    private TaskHelper placioliliDB;
+    private EditText etPlaceTitle;
+    private TextView tvLat;
+    private TextView tvLng;
+    private LatLng locationLatLng;
 
-    public void setDate(String date){
-       this.dateText = date;
+    public void setLatLng(LatLng latLng) {
+        this.locationLatLng = latLng;
     }
+
     @Override
     @NonNull
-    public Dialog onCreateDialog(Bundle savedInstanceState){
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Add event");
+
+        builder.setTitle("Save your location");
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.dialog_calendioli, null);
-        calendioliDB = new TaskHelper(getActivity());
-        etTitle = (EditText)view.findViewById(R.id.etTitle);
-        etEvent = (EditText)view.findViewById(R.id.etEvent);
-        tvDate = (TextView)view.findViewById(R.id.tvDate);
+        View view = inflater.inflate(R.layout.dialog_placioli, null);
+
+        this.placioliliDB = new TaskHelper(getActivity());
+        this.etPlaceTitle = (EditText) view.findViewById(R.id.etTitleDialogPlace);
+        this.tvLat = (TextView) view.findViewById(R.id.tvLatDialog);
+        this.tvLng = (TextView) view.findViewById(R.id.tvLngDialog);
 
         tvDate.setText(this.dateText);
         Toast.makeText(getActivity(), "DATE: " + dateText, Toast.LENGTH_SHORT).show();
-        Log.d("DB","0");
+        Log.d("DB", "0");
         builder.setView(view)
                 .setPositiveButton("Create", new DialogInterface.OnClickListener() {
                     @Override
@@ -62,7 +67,7 @@ public class CalendioliDialogBuilder extends DialogFragment{
                         values.put(Task.CALENDIOLI_DATE, dateText);
                         values.put(Task.CALENDIOLI_TITLE, title);
                         values.put(Task.CALENDIOLI_EVENT, event);
-                        Log.d("DB INSERT",values.toString());
+                        Log.d("DB INSERT", values.toString());
                         db.insertWithOnConflict(Task.TABLE_CALENDIOLI, null, values, SQLiteDatabase.CONFLICT_REPLACE);
                         db.close();
                     }
@@ -72,6 +77,6 @@ public class CalendioliDialogBuilder extends DialogFragment{
                 CalendioliDialogBuilder.this.getDialog().cancel();
             }
         });
-        return  builder.create();
+        return builder.create();
     }
 }

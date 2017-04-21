@@ -1,4 +1,4 @@
-package watsalacanoa.todolisttest.mapitas;
+package watsalacanoa.todolisttest.objects;
 
 import com.google.android.gms.maps.model.LatLng;
 
