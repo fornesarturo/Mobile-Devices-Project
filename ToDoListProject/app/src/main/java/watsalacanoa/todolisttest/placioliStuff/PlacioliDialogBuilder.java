@@ -29,11 +29,10 @@ import watsalacanoa.todolisttest.db.TaskHelper;
 public class PlacioliDialogBuilder extends DialogFragment {
 
     private TaskHelper placioliliDB;
-    private EditText etPlaceTitle;
-    private TextView tvLat;
-    private TextView tvLng;
+    private EditText etPlaceTitle, etPlaceDesc;
+    private TextView tvLat, tvLng;
     private LatLng locationLatLng;
-    private String titlePlace;
+    private String titlePlace, descPlace;
 
     public void setLatLng(LatLng latLng) {
         this.locationLatLng = latLng;
@@ -52,6 +51,7 @@ public class PlacioliDialogBuilder extends DialogFragment {
 
         this.placioliliDB = new TaskHelper(getActivity());
         this.etPlaceTitle = (EditText) view.findViewById(R.id.etTitleDialogPlace);
+        this.etPlaceDesc = (EditText) view.findViewById(R.id.etDescDialogPlace);
         this.tvLat = (TextView) view.findViewById(R.id.tvLatDialog);
         this.tvLng = (TextView) view.findViewById(R.id.tvLngDialog);
 
@@ -63,13 +63,15 @@ public class PlacioliDialogBuilder extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         titlePlace = etPlaceTitle.getText().toString();
-                        SQLiteDatabase db = calendioliDB.getWritableDatabase();
+                        descPlace = etPlaceDesc.getText().toString();
+                        SQLiteDatabase db = placioliliDB.getWritableDatabase();
                         ContentValues values = new ContentValues();
-                        values.put(Task.CALENDIOLI_DATE, dateText);
-                        values.put(Task.CALENDIOLI_TITLE, title);
-                        values.put(Task.CALENDIOLI_EVENT, event);
+                        values.put(Task.PLACIOLI_TITLE, titlePlace);
+                        values.put(Task.PLACIOLI_DESCRIPTION, descPlace);
+                        values.put(Task.PLACIOLI_LAT, locationLatLng.latitude);
+                        values.put(Task.PLACIOLI_LNG, locationLatLng.longitude);
                         Log.d("DB INSERT", values.toString());
-                        db.insertWithOnConflict(Task.TABLE_CALENDIOLI, null, values, SQLiteDatabase.CONFLICT_REPLACE);
+                        db.insertWithOnConflict(Task.TABLE_PLACIOLI, null, values, SQLiteDatabase.CONFLICT_REPLACE);
                         db.close();
                     }
                 }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

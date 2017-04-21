@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <EditText
@@ -20,11 +20,11 @@
         android:id="@+id/tvLatDialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="11dp"
+        android:layout_alignStart="@+id/etDescDialogPlace"
+        android:layout_below="@+id/etDescDialogPlace"
+        android:layout_marginTop="12dp"
         android:text="TextView"
-        tools:text="Lat: "
-        android:layout_below="@+id/etTitleDialogPlace"
-        android:layout_alignStart="@+id/etTitleDialogPlace" />
+        tools:text="Lat: " />
 
     <TextView
         android:id="@+id/tvLngDialog"
@@ -34,4 +34,15 @@
         android:layout_below="@+id/tvLatDialog"
         android:text="TextView"
         tools:text="Lng:" />
+
+    <EditText
+        android:id="@+id/etDescDialogPlace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/etTitleDialogPlace"
+        android:layout_below="@+id/etTitleDialogPlace"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:hint="Description"
+        android:inputType="textPersonName" />
 </RelativeLayout>
