@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -27,6 +28,12 @@ import watsalacanoa.todolisttest.db.TaskHelper;
  */
 
 public class PlacioliDialogBuilder extends DialogFragment {
+
+    public interface PlacioliDialogInterface {
+        public void onFinishPlacioliDialog();
+    }
+
+    private PlacioliDialogInterface listener;
 
     private TaskHelper placioliliDB;
     private EditText etPlaceTitle, etPlaceDesc;
@@ -73,6 +80,7 @@ public class PlacioliDialogBuilder extends DialogFragment {
                         Log.d("DB INSERT", values.toString());
                         db.insertWithOnConflict(Task.TABLE_PLACIOLI, null, values, SQLiteDatabase.CONFLICT_REPLACE);
                         db.close();
+                        listener.onFinishPlacioliDialog();
                     }
                 }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
@@ -81,5 +89,16 @@ public class PlacioliDialogBuilder extends DialogFragment {
                 }
         });
         return builder.create();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        try {
+            listener = (PlacioliDialogInterface) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement ItemDialogListener");
+        }
     }
 }
