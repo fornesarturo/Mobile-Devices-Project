@@ -1,4 +1,4 @@
-package watsalacanoa.todolisttest.placioliStuff;
+package watsalacanoa.todolisttest.caldroidStuff;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -15,71 +15,73 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.model.LatLng;
-
 import watsalacanoa.todolisttest.R;
-import watsalacanoa.todolisttest.caldroidStuff.CalendioliDialogBuilder;
 import watsalacanoa.todolisttest.db.Task;
 import watsalacanoa.todolisttest.db.TaskHelper;
 
 /**
- * Created by miguel on 21/04/17.
+ * Created by spide on 22/4/2017.
  */
-/*
-public class PlacioliDialogBuilder extends DialogFragment {
 
-    private TaskHelper placioliliDB;
-    private EditText etPlaceTitle;
-    private TextView tvLat;
-    private TextView tvLng;
-    private LatLng locationLatLng;
-    private TextView tvDate;
+public class CalendioloDialogEditBuilder extends DialogFragment{
 
-    public void setLatLng(LatLng latLng) {
-        this.locationLatLng = latLng;
+        private EditText etTitle,
+                etEvent;
+        private TextView tvDate;
+        private String dateText;
+        private String title;
+        private String event;
+        private TaskHelper calendioliDB;
+        private String oldTitle;
+
+    public void setDate(String date){
+        this.dateText = date;
     }
-
+    public void setTitle(String title){
+        this.title = title;
+        this.oldTitle = title;
+    }
+    public void setEvent(String event){
+        this.event = event;
+    }
     @Override
     @NonNull
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-
+    public Dialog onCreateDialog(Bundle savedInstanceState){
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
-        builder.setTitle("Save your location");
+        builder.setTitle("Edit event");
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.dialog_placioli, null);
-
-        this.placioliliDB = new TaskHelper(getActivity());
-        this.etPlaceTitle = (EditText) view.findViewById(R.id.etTitleDialogPlace);
-        this.tvLat = (TextView) view.findViewById(R.id.tvLatDialog);
-        this.tvLng = (TextView) view.findViewById(R.id.tvLngDialog);
-        this.tvDate = (TextView)view.findViewById(R.id.tvDate);
-
+        View view = inflater.inflate(R.layout.dialog_calendioli, null);
+        calendioliDB = new TaskHelper(getActivity());
+        etTitle = (EditText)view.findViewById(R.id.etTitle);
+        etTitle.setText(this.title);
+        etEvent = (EditText)view.findViewById(R.id.etEvent);
+        etEvent.setText(this.event);
+        tvDate = (TextView)view.findViewById(R.id.tvDate);
         tvDate.setText(this.dateText);
         Toast.makeText(getActivity(), "DATE: " + dateText, Toast.LENGTH_SHORT).show();
-        Log.d("DB", "0");
+        Log.d("DB","0");
         builder.setView(view)
-                .setPositiveButton("Create", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Accept", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        title = etTitle.getText().toString();
                         event = etEvent.getText().toString();
+                        title = etTitle.getText().toString();
                         SQLiteDatabase db = calendioliDB.getWritableDatabase();
                         ContentValues values = new ContentValues();
                         values.put(Task.CALENDIOLI_DATE, dateText);
                         values.put(Task.CALENDIOLI_TITLE, title);
                         values.put(Task.CALENDIOLI_EVENT, event);
-                        Log.d("DB INSERT", values.toString());
-                        db.insertWithOnConflict(Task.TABLE_CALENDIOLI, null, values, SQLiteDatabase.CONFLICT_REPLACE);
+                        Log.d("DB INSERT",values.toString());
+                        db.update(Task.TABLE_CALENDIOLI, values, Task.CALENDIOLI_TITLE + " = '" + oldTitle + "'", null);
+                        //db.insertWithOnConflict(Task.TABLE_CALENDIOLI, null, values, SQLiteDatabase.CONFLICT_REPLACE);
                         db.close();
                     }
                 }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                CalendioliDialogBuilder.this.getDialog().cancel();
+                CalendioloDialogEditBuilder.this.getDialog().cancel();
             }
         });
-        return builder.create();
+        return  builder.create();
     }
 }
-*/
