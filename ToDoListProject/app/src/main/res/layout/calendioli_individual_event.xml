@@ -20,4 +20,23 @@
         android:layout_marginRight="15dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:text="Description"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/calendioli_event_description"
+        android:id="@+id/calendioli_buttonEdit"
+        android:layout_toLeftOf="@+id/notioli_delete"
+        android:layout_alignParentBottom="true"
+        android:text="EDIT"
+        android:onClick="editCalendioli"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/calendioli_event_description"
+        android:id="@+id/notioli_edit"
+        android:layout_toRightOf="@+id/calendioli_buttonEdit"
+        android:layout_alignParentBottom="true"
+        android:text="DELETE"
+        android:onClick="deleteCalendioli"/>
 </RelativeLayout>
