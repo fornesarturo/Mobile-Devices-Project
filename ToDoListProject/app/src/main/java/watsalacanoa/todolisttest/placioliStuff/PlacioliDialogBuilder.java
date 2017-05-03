@@ -26,7 +26,7 @@ import watsalacanoa.todolisttest.db.TaskHelper;
 /**
  * Created by miguel on 21/04/17.
  */
-/*
+
 public class PlacioliDialogBuilder extends DialogFragment {
 
     public interface PlacioliDialogInterface {
@@ -39,11 +39,7 @@ public class PlacioliDialogBuilder extends DialogFragment {
     private EditText etPlaceTitle, etPlaceDesc;
     private TextView tvLat, tvLng;
     private LatLng locationLatLng;
-<<<<<<< HEAD
     private String titlePlace, descPlace;
-=======
-    private TextView tvDate;
->>>>>>> refs/remotes/origin/Sebastian/dev
 
     public void setLatLng(LatLng latLng) {
         this.locationLatLng = latLng;
@@ -65,7 +61,6 @@ public class PlacioliDialogBuilder extends DialogFragment {
         this.etPlaceDesc = (EditText) view.findViewById(R.id.etDescDialogPlace);
         this.tvLat = (TextView) view.findViewById(R.id.tvLatDialog);
         this.tvLng = (TextView) view.findViewById(R.id.tvLngDialog);
-        this.tvDate = (TextView)view.findViewById(R.id.tvDate);
 
         this.tvLat.setText(this.locationLatLng.latitude+"");
         this.tvLng.setText(this.locationLatLng.longitude+"");
@@ -107,4 +102,3 @@ public class PlacioliDialogBuilder extends DialogFragment {
         }
     }
 }
-*/

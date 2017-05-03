@@ -7,28 +7,21 @@ import android.icu.text.SimpleDateFormat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import watsalacanoa.todolisttest.Calendioli;
 import watsalacanoa.todolisttest.R;
 import watsalacanoa.todolisttest.adapters.CalendioliAdapter;
-import watsalacanoa.todolisttest.adapters.ImageAdapter;
 import watsalacanoa.todolisttest.db.Task;
 import watsalacanoa.todolisttest.db.TaskHelper;
-import watsalacanoa.todolisttest.objects.Nota;
-import watsalacanoa.todolisttest.objects.Pending;
 
 public class CalendioliEvent extends AppCompatActivity {
     TextView noEvent;
@@ -42,9 +35,16 @@ public class CalendioliEvent extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_calendioli_event);
+
+        eventList = (ListView) findViewById(R.id.calendioli_list_view);
+
+        noEvent = (TextView) findViewById(R.id.calendioli_no_event);
+        noEvent.setText("");
+
         Intent i = getIntent();
         date = i.getStringExtra("date");
-        updateUI();
+        if(date != null) {
             ////////////////
             /*
             TaskHelper dbh2 = new TaskHelper(this);
@@ -73,76 +73,35 @@ public class CalendioliEvent extends AppCompatActivity {
 
             */
             //////////////////
-    }
-
-    public void editCalendioli(View v){
-        //dbh = new TaskHelper(this);
-        //SQLiteDatabase db = dbh.getWritableDatabase();
-       // View parent = (View) v.getParent();
-        CalendioloDialogEditBuilder cdb = new CalendioloDialogEditBuilder();
-        View parent = (View) v.getParent();
-        TextView titleTV = (TextView) parent.findViewById(R.id.calendioli_event_title);
-        String titleT = titleTV.getText().toString();
-        TextView eventTV = (TextView) parent.findViewById(R.id.calendioli_event_description);
-        String eventT = eventTV.getText().toString();
-        cdb.setDate(date);
-        cdb.setTitle(titleT);
-        cdb.setEvent(eventT);
-        cdb.show(getFragmentManager(), "hh");
-        if(date!=null){
-            updateUI();
-        }
-    }
-    public void deleteCalendioli(View v) {
-        //Toast.makeText(this, "SUP", Toast.LENGTH_SHORT).show();
-        dbh = new TaskHelper(this);
-        SQLiteDatabase db = dbh.getWritableDatabase();
-        View parent = (View) v.getParent();
-        TextView taskTextView = (TextView) parent.findViewById(R.id.calendioli_event_title);
-        String calendioli = taskTextView.getText().toString();
-        db.delete(Task.TABLE_CALENDIOLI, Task.CALENDIOLI_TITLE+ " = ? ", new String[] {calendioli});
-        //db.delete(Task.TABLE_CALENDIOLI, Task.CALENDIOLI_DATE + " = ? ", new String[] {notioli});
-        db.close();
-        if(date!=null) {
-            updateUI();
-        }
-    }
-
-    private void updateUI(){
-        setContentView(R.layout.activity_calendioli_event);
-        eventList = (ListView) findViewById(R.id.calendioli_list_view);
-
-        noEvent = (TextView) findViewById(R.id.calendioli_no_event);
-        noEvent.setText("");
-
-
-        if(date != null) {
             JSONArray data = new JSONArray();
             dbh = new TaskHelper(this);
             SQLiteDatabase db = dbh.getReadableDatabase();
             String clause = Task.CALENDIOLI_DATE + " = ?";
             String[] values = {date};
             Cursor c = db.query(Task.TABLE_CALENDIOLI, null, clause, values, null, null, null);
-            if (c.moveToFirst()) {
+            if(c.moveToFirst()){
                 int titleIndex = c.getColumnIndex(Task.CALENDIOLI_TITLE);
                 int eventIndex = c.getColumnIndex(Task.CALENDIOLI_EVENT);
                 int idIndex = c.getColumnIndex(Task.CALENDIOLI_ID);
                 String title = "", description = "", id = "";
+
                 //First event
                 title = c.getString(titleIndex);
                 description = c.getString(eventIndex);
                 id = c.getString(idIndex);
+
                 JSONObject event = new JSONObject();
                 try {
                     event.put(TITLE, title);
                     event.put(DESCRIPTION, description);
                     event.put(ID, id);
                     data.put(event);
-                } catch (JSONException jose) {
+                }catch (JSONException jose){
                     jose.printStackTrace();
                 }
+
                 //While there are other events
-                while (c.moveToNext()) {
+                while(c.moveToNext()){
                     title = c.getString(titleIndex);
                     description = c.getString(eventIndex);
                     id = c.getString(idIndex);
@@ -153,37 +112,18 @@ public class CalendioliEvent extends AppCompatActivity {
                         event.put(DESCRIPTION, description);
                         event.put(ID, id);
                         data.put(event);
-                    } catch (JSONException jose) {
+                    }catch (JSONException jose){
                         jose.printStackTrace();
                     }
                 }
                 eventList.setAdapter(new CalendioliAdapter(this, data));
 
-            } else {
+            }
+            else{
                 noEvent.setText("No events");
             }
         }
     }
-
-        /*
-        ArrayList<Pending> notioliList = new ArrayList<>();
-        SQLiteDatabase db = dbh.getReadableDatabase();
-        Cursor cursor = db.query(Task.TABLE_NOTIOLI, null,
-                null, null, null, null, null);
-        while(cursor.moveToNext()){
-            int date = cursor.getColumnIndex(Task.CALENDIOLI_DATE);
-            int title = cursor.getColumnIndex(Task.CALENDIOLI_TITLE);
-            int event = cursor.getColumnIndex(Task.CALENDIOLI_EVENT);
-            //notioliList.add(new Pending(cursor.getString(date), cursor.getString(title), cursor.getInt(event)));
-        }
-
-        //mAdapter = new ImageAdapter(this, notioliList);
-        //mListView.setAdapter(mAdapter);
-
-        cursor.close();
-        db.close();
-
-        */
 
 
 }

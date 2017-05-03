@@ -56,9 +56,9 @@ public class Calendioli extends AppCompatActivity {
     }
 
     public void goHome(View v){
-        //Intent i = new Intent();
-        //i.putExtra("message","You visited Calendioli");
-        //setResult(Activity.RESULT_OK,i);
+        Intent i = new Intent();
+        i.putExtra("message","You visited Calendioli");
+        setResult(Activity.RESULT_OK,i);
         finish();
     }
 
@@ -97,9 +97,9 @@ public class Calendioli extends AppCompatActivity {
 
         @Override
         public void onCaldroidViewCreated() {
-            //Toast.makeText(getApplicationContext(),
-                  //  "Caldroid view is created",
-                  //  Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),
+                    "Caldroid view is created",
+                    Toast.LENGTH_SHORT).show();
         }
     };
 }
