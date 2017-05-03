@@ -25,7 +25,7 @@ import watsalacanoa.todolisttest.db.TaskHelper;
 /**
  * Created by miguel on 21/04/17.
  */
-/*
+
 public class PlacioliDialogBuilder extends DialogFragment {
 
     private TaskHelper placioliliDB;
@@ -82,4 +82,3 @@ public class PlacioliDialogBuilder extends DialogFragment {
         return builder.create();
     }
 }
-*/
