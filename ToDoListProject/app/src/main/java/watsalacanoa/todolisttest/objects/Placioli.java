@@ -1,5 +1,7 @@
 package watsalacanoa.todolisttest.objects;
 
+import android.util.Log;
+
 import com.google.android.gms.maps.model.LatLng;
 
 /**

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -28,15 +29,25 @@ import watsalacanoa.todolisttest.db.TaskHelper;
 
 public class PlacioliDialogBuilder extends DialogFragment {
 
+    public interface PlacioliDialogInterface {
+        public void onFinishPlacioliDialog();
+    }
+
+    private PlacioliDialogInterface listener;
+
     private TaskHelper placioliliDB;
-    private EditText etPlaceTitle;
-    private TextView tvLat;
-    private TextView tvLng;
+    private EditText etPlaceTitle, etPlaceDesc;
+    private TextView tvLat, tvLng;
     private LatLng locationLatLng;
+<<<<<<< HEAD
+    private String titlePlace, descPlace;
+=======
     private TextView tvDate;
+>>>>>>> refs/remotes/origin/Sebastian/dev
 
     public void setLatLng(LatLng latLng) {
         this.locationLatLng = latLng;
+        
     }
 
     @Override
@@ -51,34 +62,48 @@ public class PlacioliDialogBuilder extends DialogFragment {
 
         this.placioliliDB = new TaskHelper(getActivity());
         this.etPlaceTitle = (EditText) view.findViewById(R.id.etTitleDialogPlace);
+        this.etPlaceDesc = (EditText) view.findViewById(R.id.etDescDialogPlace);
         this.tvLat = (TextView) view.findViewById(R.id.tvLatDialog);
         this.tvLng = (TextView) view.findViewById(R.id.tvLngDialog);
         this.tvDate = (TextView)view.findViewById(R.id.tvDate);
 
-        tvDate.setText(this.dateText);
-        Toast.makeText(getActivity(), "DATE: " + dateText, Toast.LENGTH_SHORT).show();
-        Log.d("DB", "0");
+        this.tvLat.setText(this.locationLatLng.latitude+"");
+        this.tvLng.setText(this.locationLatLng.longitude+"");
+
         builder.setView(view)
                 .setPositiveButton("Create", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        title = etTitle.getText().toString();
-                        event = etEvent.getText().toString();
-                        SQLiteDatabase db = calendioliDB.getWritableDatabase();
+                        titlePlace = etPlaceTitle.getText().toString();
+                        descPlace = etPlaceDesc.getText().toString();
+                        SQLiteDatabase db = placioliliDB.getWritableDatabase();
                         ContentValues values = new ContentValues();
-                        values.put(Task.CALENDIOLI_DATE, dateText);
-                        values.put(Task.CALENDIOLI_TITLE, title);
-                        values.put(Task.CALENDIOLI_EVENT, event);
+                        values.put(Task.PLACIOLI_TITLE, titlePlace);
+                        values.put(Task.PLACIOLI_DESCRIPTION, descPlace);
+                        values.put(Task.PLACIOLI_LAT, locationLatLng.latitude);
+                        values.put(Task.PLACIOLI_LNG, locationLatLng.longitude);
                         Log.d("DB INSERT", values.toString());
-                        db.insertWithOnConflict(Task.TABLE_CALENDIOLI, null, values, SQLiteDatabase.CONFLICT_REPLACE);
+                        db.insertWithOnConflict(Task.TABLE_PLACIOLI, null, values, SQLiteDatabase.CONFLICT_REPLACE);
                         db.close();
+                        listener.onFinishPlacioliDialog();
                     }
                 }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                CalendioliDialogBuilder.this.getDialog().cancel();
-            }
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    PlacioliDialogBuilder.this.getDialog().cancel();
+                }
         });
         return builder.create();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        try {
+            listener = (PlacioliDialogInterface) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement ItemDialogListener");
+        }
     }
 }
