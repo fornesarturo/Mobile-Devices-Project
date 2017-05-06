@@ -19,7 +19,6 @@ import android.widget.Toast;
 import com.google.android.gms.maps.model.LatLng;
 
 import watsalacanoa.todolisttest.R;
-import watsalacanoa.todolisttest.caldroidStuff.CalendioliDialogBuilder;
 import watsalacanoa.todolisttest.db.Task;
 import watsalacanoa.todolisttest.db.TaskHelper;
 
@@ -39,11 +38,8 @@ public class PlacioliDialogBuilder extends DialogFragment {
     private EditText etPlaceTitle, etPlaceDesc;
     private TextView tvLat, tvLng;
     private LatLng locationLatLng;
-<<<<<<< HEAD
     private String titlePlace, descPlace;
-=======
     private TextView tvDate;
->>>>>>> refs/remotes/origin/Sebastian/dev
 
     public void setLatLng(LatLng latLng) {
         this.locationLatLng = latLng;
