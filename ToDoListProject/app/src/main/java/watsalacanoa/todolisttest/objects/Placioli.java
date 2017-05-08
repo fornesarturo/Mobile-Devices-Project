@@ -1,7 +1,5 @@
 package watsalacanoa.todolisttest.objects;
 
-import android.util.Log;
-
 import com.google.android.gms.maps.model.LatLng;
 
 /**
@@ -13,14 +11,17 @@ public class Placioli {
     private String title;
     private String description;
     private LatLng latLng;
+    private int id;
 
     public String getTitle(){ return this.title;}
     public String getDescription() {return this.description;}
+    public int getId() { return this.id; }
 
-    public Placioli(String title, String desc, LatLng latLng){
+    public Placioli(String title, String desc, LatLng latLng, int id){
         this.title = title;
         this.description = desc;
         this.latLng = latLng;
+        this.id = id;
     }
 
     public LatLng getLatLng() {

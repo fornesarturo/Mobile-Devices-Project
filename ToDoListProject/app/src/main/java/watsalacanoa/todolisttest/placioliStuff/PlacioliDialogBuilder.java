@@ -14,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -29,7 +28,7 @@ import watsalacanoa.todolisttest.db.TaskHelper;
 public class PlacioliDialogBuilder extends DialogFragment {
 
     public interface PlacioliDialogInterface {
-        public void onFinishPlacioliDialog();
+        void onFinishPlacioliDialog();
     }
 
     private PlacioliDialogInterface listener;
@@ -39,11 +38,25 @@ public class PlacioliDialogBuilder extends DialogFragment {
     private TextView tvLat, tvLng;
     private LatLng locationLatLng;
     private String titlePlace, descPlace;
-    private TextView tvDate;
+    private String positiveButtonTitle = "Create";
+
+
+    private int idToEdit;
+    private String titleToEdit = "";
+    private String descToEdit = "";
+    private boolean isEdit = false;
 
     public void setLatLng(LatLng latLng) {
         this.locationLatLng = latLng;
         
+    }
+
+    public void setUpdate(String title, String desc, int id) {
+        this.titleToEdit = title;
+        this.descToEdit = desc;
+        this.idToEdit = id;
+        this.isEdit = true;
+        this.positiveButtonTitle = "Save";
     }
 
     @Override
@@ -61,26 +74,43 @@ public class PlacioliDialogBuilder extends DialogFragment {
         this.etPlaceDesc = (EditText) view.findViewById(R.id.etDescDialogPlace);
         this.tvLat = (TextView) view.findViewById(R.id.tvLatDialog);
         this.tvLng = (TextView) view.findViewById(R.id.tvLngDialog);
-        this.tvDate = (TextView)view.findViewById(R.id.tvDate);
+
+        if(this.isEdit) {
+            this.etPlaceDesc.setText(this.descToEdit);
+            this.etPlaceTitle.setText(this.titleToEdit);
+        }
 
         this.tvLat.setText(this.locationLatLng.latitude+"");
         this.tvLng.setText(this.locationLatLng.longitude+"");
 
         builder.setView(view)
-                .setPositiveButton("Create", new DialogInterface.OnClickListener() {
+                .setPositiveButton(this.positiveButtonTitle, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        titlePlace = etPlaceTitle.getText().toString();
-                        descPlace = etPlaceDesc.getText().toString();
-                        SQLiteDatabase db = placioliliDB.getWritableDatabase();
-                        ContentValues values = new ContentValues();
-                        values.put(Task.PLACIOLI_TITLE, titlePlace);
-                        values.put(Task.PLACIOLI_DESCRIPTION, descPlace);
-                        values.put(Task.PLACIOLI_LAT, locationLatLng.latitude);
-                        values.put(Task.PLACIOLI_LNG, locationLatLng.longitude);
-                        Log.d("DB INSERT", values.toString());
-                        db.insertWithOnConflict(Task.TABLE_PLACIOLI, null, values, SQLiteDatabase.CONFLICT_REPLACE);
-                        db.close();
+                        if(isEdit) {
+                            titlePlace = etPlaceTitle.getText().toString();
+                            descPlace = etPlaceDesc.getText().toString();
+                            SQLiteDatabase db = placioliliDB.getWritableDatabase();
+                            ContentValues values = new ContentValues();
+                            values.put(Task.PLACIOLI_TITLE, titlePlace);
+                            values.put(Task.PLACIOLI_DESCRIPTION, descPlace);
+                            String clause = Task.PLACIOLI_ID + " = ?";
+                            String args[] = {idToEdit + ""};
+                            db.update(Task.TABLE_PLACIOLI, values, clause, args);
+                        }
+                        else {
+                            titlePlace = etPlaceTitle.getText().toString();
+                            descPlace = etPlaceDesc.getText().toString();
+                            SQLiteDatabase db = placioliliDB.getWritableDatabase();
+                            ContentValues values = new ContentValues();
+                            values.put(Task.PLACIOLI_TITLE, titlePlace);
+                            values.put(Task.PLACIOLI_DESCRIPTION, descPlace);
+                            values.put(Task.PLACIOLI_LAT, locationLatLng.latitude);
+                            values.put(Task.PLACIOLI_LNG, locationLatLng.longitude);
+                            Log.d("DB INSERT", values.toString());
+                            db.insertWithOnConflict(Task.TABLE_PLACIOLI, null, values, SQLiteDatabase.CONFLICT_REPLACE);
+                            db.close();
+                        }
                         listener.onFinishPlacioliDialog();
                     }
                 }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

@@ -3,34 +3,22 @@ package watsalacanoa.todolisttest.caldroidStuff;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.icu.text.SimpleDateFormat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-
-import watsalacanoa.todolisttest.Calendioli;
 import watsalacanoa.todolisttest.R;
 import watsalacanoa.todolisttest.adapters.CalendioliAdapter;
-import watsalacanoa.todolisttest.adapters.ImageAdapter;
 import watsalacanoa.todolisttest.db.Task;
 import watsalacanoa.todolisttest.db.TaskHelper;
-import watsalacanoa.todolisttest.objects.Nota;
-import watsalacanoa.todolisttest.objects.Pending;
 
-public class CalendioliEvent extends AppCompatActivity {
+public class CalendioliEvent extends AppCompatActivity implements CalendioloDialogEditBuilder.DialogEditBuilderFinish{
     TextView noEvent;
     ListView eventList;
     String date;
@@ -89,9 +77,9 @@ public class CalendioliEvent extends AppCompatActivity {
         cdb.setTitle(titleT);
         cdb.setEvent(eventT);
         cdb.show(getFragmentManager(), "hh");
-        if(date!=null){
-            updateUI();
-        }
+        //if(date!=null){
+        //    updateUI();
+        //}
     }
     public void deleteCalendioli(View v) {
         //Toast.makeText(this, "SUP", Toast.LENGTH_SHORT).show();
@@ -163,6 +151,11 @@ public class CalendioliEvent extends AppCompatActivity {
                 noEvent.setText("No events");
             }
         }
+    }
+
+    @Override
+    public void onFinishCalendioliEditDialog() {
+        this.updateUI();
     }
 
         /*

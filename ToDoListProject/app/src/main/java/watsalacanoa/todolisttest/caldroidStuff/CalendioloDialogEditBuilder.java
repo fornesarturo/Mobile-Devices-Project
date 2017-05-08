@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import watsalacanoa.todolisttest.R;
 import watsalacanoa.todolisttest.db.Task;
 import watsalacanoa.todolisttest.db.TaskHelper;
+import watsalacanoa.todolisttest.placioliStuff.PlacioliDialogBuilder;
 
 /**
  * Created by spide on 22/4/2017.
@@ -25,22 +27,25 @@ import watsalacanoa.todolisttest.db.TaskHelper;
 
 public class CalendioloDialogEditBuilder extends DialogFragment{
 
-        private EditText etTitle,
-                etEvent;
-        private TextView tvDate;
-        private String dateText;
-        private String title;
-        private String event;
-        private TaskHelper calendioliDB;
-        private String oldTitle;
+    private EditText etTitle,
+            etEvent;
+    private TextView tvDate;
+    private String dateText;
+    private String title;
+    private String event;
+    private TaskHelper calendioliDB;
+    private String oldTitle;
+    private DialogEditBuilderFinish listener;
 
     public void setDate(String date){
         this.dateText = date;
     }
+
     public void setTitle(String title){
         this.title = title;
         this.oldTitle = title;
     }
+
     public void setEvent(String event){
         this.event = event;
     }
@@ -74,6 +79,7 @@ public class CalendioloDialogEditBuilder extends DialogFragment{
                         Log.d("DB INSERT",values.toString());
                         db.update(Task.TABLE_CALENDIOLI, values, Task.CALENDIOLI_TITLE + " = '" + oldTitle + "'", null);
                         //db.insertWithOnConflict(Task.TABLE_CALENDIOLI, null, values, SQLiteDatabase.CONFLICT_REPLACE);
+                        listener.onFinishCalendioliEditDialog();
                         db.close();
                     }
                 }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -83,5 +89,20 @@ public class CalendioloDialogEditBuilder extends DialogFragment{
             }
         });
         return  builder.create();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        try {
+            listener = (CalendioloDialogEditBuilder.DialogEditBuilderFinish) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement ItemDialogListener");
+        }
+    }
+
+    public interface DialogEditBuilderFinish {
+        void onFinishCalendioliEditDialog();
     }
 }

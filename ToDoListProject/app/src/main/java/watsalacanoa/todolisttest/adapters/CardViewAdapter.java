@@ -19,8 +19,8 @@ import org.json.JSONException;
 
 import java.util.List;
 
-import watsalacanoa.todolisttest.MainActivity;
 import watsalacanoa.todolisttest.ChecklistActivity;
+import watsalacanoa.todolisttest.MainActivity;
 import watsalacanoa.todolisttest.R;
 import watsalacanoa.todolisttest.contentprovider.NoteContentProvider;
 

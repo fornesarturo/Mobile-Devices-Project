@@ -13,8 +13,8 @@ import android.text.TextUtils;
 import java.util.Arrays;
 import java.util.HashSet;
 
-import watsalacanoa.todolisttest.db.TaskHelper;
 import watsalacanoa.todolisttest.db.Task;
+import watsalacanoa.todolisttest.db.TaskHelper;
 
 
 public class NoteContentProvider extends ContentProvider {
