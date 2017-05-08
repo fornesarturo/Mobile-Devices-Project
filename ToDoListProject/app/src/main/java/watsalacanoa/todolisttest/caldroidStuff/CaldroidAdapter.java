@@ -59,8 +59,7 @@ public class CaldroidAdapter extends CaldroidGridAdapter {
 
         // Set color of the dates in previous / next month
         if (dateTime.getMonth() != month) {
-            tv1.setTextColor(resources
-                    .getColor(com.caldroid.R.color.caldroid_darker_gray));
+            tv1.setTextColor(resources.getColor(com.caldroid.R.color.caldroid_darker_gray));
         }
 
         boolean shouldResetDiabledView = false;
@@ -88,8 +87,7 @@ public class CaldroidAdapter extends CaldroidGridAdapter {
 
         // Customize for selected dates
         if (selectedDates != null && selectedDates.indexOf(dateTime) != -1) {
-            cellView.setBackgroundColor(resources
-                    .getColor(com.caldroid.R.color.caldroid_sky_blue));
+            cellView.setBackgroundColor(resources.getColor(com.caldroid.R.color.caldroid_sky_blue));
 
             tv1.setTextColor(Color.BLACK);
 

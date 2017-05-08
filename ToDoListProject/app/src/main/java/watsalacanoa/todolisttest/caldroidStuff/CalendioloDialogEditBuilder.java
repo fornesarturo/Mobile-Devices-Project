@@ -19,7 +19,6 @@ import android.widget.Toast;
 import watsalacanoa.todolisttest.R;
 import watsalacanoa.todolisttest.db.Task;
 import watsalacanoa.todolisttest.db.TaskHelper;
-import watsalacanoa.todolisttest.placioliStuff.PlacioliDialogBuilder;
 
 /**
  * Created by spide on 22/4/2017.

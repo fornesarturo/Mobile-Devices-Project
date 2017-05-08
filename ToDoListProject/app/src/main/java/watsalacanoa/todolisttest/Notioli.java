@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,7 +19,9 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -193,11 +196,11 @@ public class Notioli extends AppCompatActivity {
                     STORAGE_PERMISSION);
         }
         else{
-            savePicturePermitted();
+            takePicturePermitted();
         }
     }
 
-    public void savePicturePermitted(){
+    public void takePicturePermitted(){
         Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if(i.resolveActivity(getPackageManager()) != null){
             File photo = null;
@@ -206,12 +209,16 @@ public class Notioli extends AppCompatActivity {
                 String name  = "IMAGE_"+time;
                 File directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
                 photo = File.createTempFile(name, ".jpg", directory);
+                Log.d("PHOTO!", photo.getAbsolutePath());
                 lastImageURI = photo.getAbsolutePath();
             }catch(IOException ioe){
                 ioe.printStackTrace();
             }
             if(photo != null){
-                i.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photo));
+                Log.d("PHOTO?", "Taking photo");
+                //Uri photoURI = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", createImageFile());
+                i.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getPackageName() + ".provider", photo));
+                Log.d("PHOTO?", "Putting extra");
                 startActivityForResult(i, SAVE_PICTURE);
             }
         }
@@ -222,7 +229,7 @@ public class Notioli extends AppCompatActivity {
                                            @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
         if(requestCode == STORAGE_PERMISSION && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-            savePicturePermitted();
+            takePicturePermitted();
         }
     }
 
@@ -243,6 +250,7 @@ public class Notioli extends AppCompatActivity {
         if(res == Activity.RESULT_OK){
             switch(req){
                 case SAVE_PICTURE:
+                    Log.d("REGRESO", "REGRESAMOS!");
                     saveImageDB();
                     updateUI();
                     break;
