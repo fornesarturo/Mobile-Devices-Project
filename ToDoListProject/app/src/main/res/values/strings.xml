@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Notioli</string>
-    <string name="checklist_list">Checklists</string>
-    <string name="places">Places</string>
-    <string name="calendar">Calendar</string>
-    <string name="title_activity_maps">Map</string>
+    <string name="checklist_list">Checklistioli</string>
+    <string name="places">Placioli</string>
+    <string name="calendar">Calendioli</string>
+    <string name="title_activity_maps">Mapioli</string>
 </resources>

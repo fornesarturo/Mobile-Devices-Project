@@ -84,8 +84,8 @@ public class Notioli extends AppCompatActivity {
     private void addNote() {
         final EditText notioliEditText = new EditText(this);
         AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle("Add Notioli")
-                .setMessage("Add a new Notioli")
+                .setTitle("Add notioli")
+                .setMessage("Add a new notioli")
                 .setView(notioliEditText)
                 .setPositiveButton("Add", new DialogInterface.OnClickListener() {
                     @Override
@@ -173,7 +173,7 @@ public class Notioli extends AppCompatActivity {
 
     public void goHome(View v){
         Intent i = new Intent();
-        i.putExtra("message","You visited Notioli");
+        i.putExtra("message","You visited notioli");
         setResult(Activity.RESULT_OK,i);
         finish();
     }

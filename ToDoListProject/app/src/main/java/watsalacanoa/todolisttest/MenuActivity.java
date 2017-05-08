@@ -22,9 +22,9 @@ public class MenuActivity extends AppCompatActivity {
         places = (Button) findViewById(R.id.button3);
         calendar = (Button) findViewById(R.id.button4);
 
-        checklist.setText("Checklist");
+        checklist.setText("Checklistioli");
         notioli.setText("Notioli");
-        places.setText("Places");
+        places.setText("Placioli");
         calendar.setText("Calendioli");
     }
 
