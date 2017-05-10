@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -60,7 +61,13 @@ public class ImageAdapter extends BaseAdapter {
 
         if(currentNote.getImage() != null) {
             imageString = currentNote.getImage();
-            imageBitmap = BitmapFactory.decodeFile(imageString);
+            try {
+                imageBitmap = BitmapFactory.decodeFile(imageString);
+            }
+            catch(OutOfMemoryError error) {
+                error.printStackTrace();
+                Toast.makeText(parent.getContext(), "NO MORE MEMORY", Toast.LENGTH_SHORT).show();
+            }
         }
 
         title.setText(currentNote.getTitle());
