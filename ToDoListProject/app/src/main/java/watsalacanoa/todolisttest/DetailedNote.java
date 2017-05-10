@@ -48,7 +48,7 @@ public class DetailedNote extends AppCompatActivity {
 
         Intent i = getIntent();
         String textOld = oldNote = i.getStringExtra("text");
-        String imagePath = i.getStringExtra("image");
+        String imagePath = lastImageURI = i.getStringExtra("image");
         text.setText(textOld);
 
         String imageString;
