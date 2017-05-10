@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="watsalacanoa.todolisttest.DetailedNote">
+
+    <EditText
+        android:id="@+id/item_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:id="@+id/item_image"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_below="@+id/item_title"
+        android:layout_centerHorizontal="true" />
+    <Button
+        android:text="Save And Exit"
+        android:id="@+id/item_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="15dp"
+        android:onClick="goBack"/>
+    <Button
+        android:text="Take Picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_alignParentBottom="true"
+        android:onClick="takePicture"/>
+
+</RelativeLayout>
+

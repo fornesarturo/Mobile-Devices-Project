@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,32 +47,19 @@ public class ImageAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
         if(convertView == null) {
             convertView = this.activity.getLayoutInflater().inflate(R.layout.notioli_item, null);
         }
 
         TextView title = (TextView) convertView.findViewById(R.id.notioli_title);
-        ImageView image = (ImageView) convertView.findViewById(R.id.notioli_image);
-
-        String imageString;
-        Bitmap imageBitmap = null;
+        Button delete = (Button) convertView.findViewById(R.id.notioli_delete);
 
         Nota currentNote = this.data.get(position);
 
-        if(currentNote.getImage() != null) {
-            imageString = currentNote.getImage();
-            try {
-                imageBitmap = BitmapFactory.decodeFile(imageString);
-            }
-            catch(OutOfMemoryError error) {
-                error.printStackTrace();
-                Toast.makeText(parent.getContext(), "NO MORE MEMORY", Toast.LENGTH_SHORT).show();
-            }
-        }
-
         title.setText(currentNote.getTitle());
-        image.setImageBitmap(imageBitmap);
+
+        delete.setFocusable(false);
+        delete.setFocusableInTouchMode(false);
 
         return convertView;
     }

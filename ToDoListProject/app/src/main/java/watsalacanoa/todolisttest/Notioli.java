@@ -1,57 +1,28 @@
 package watsalacanoa.todolisttest;
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import watsalacanoa.todolisttest.adapters.ImageAdapter;
 import watsalacanoa.todolisttest.db.Task;
 import watsalacanoa.todolisttest.db.TaskHelper;
 import watsalacanoa.todolisttest.objects.Nota;
 
-//import android.graphics.Bitmap;
-//import android.graphics.BitmapFactory;
-
-public class Notioli extends AppCompatActivity {
-
-    // Dialog Builder
-    private EditText mNewItemText;
-    private String pastNotioliText;
-    private View viewForCurrentImage;
-    private String lastImageURI = "";
+public class Notioli extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private TaskHelper mNotioliHelper;
     private ListView mListView;
@@ -59,8 +30,7 @@ public class Notioli extends AppCompatActivity {
     private ImageAdapter mAdapter;
 
     //Image
-    private static final int SAVE_PICTURE = 1;
-    private final static int STORAGE_PERMISSION = 2;
+    private final static int DETAILED_NOTIOLI = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,9 +46,8 @@ public class Notioli extends AppCompatActivity {
                 addNote();
             }
         });
+        mListView.setOnItemClickListener(this);
         updateUI();
-
-
     }
 
     private void addNote() {
@@ -121,6 +90,7 @@ public class Notioli extends AppCompatActivity {
 
         cursor.close();
         db.close();
+        mListView.setOnItemClickListener(this);
     }
 
     public void deleteNotioli(View v){
@@ -133,44 +103,6 @@ public class Notioli extends AppCompatActivity {
         updateUI();
     }
 
-    public AlertDialog.Builder getDialog() {
-        final SQLiteDatabase db = mNotioliHelper.getWritableDatabase();
-        LayoutInflater li = LayoutInflater.from(this);
-        LinearLayout newNoteBaseLayout = (LinearLayout) li.inflate(R.layout.dialog_new_item, null);
-        mNewItemText = (EditText) newNoteBaseLayout.getChildAt(0);
-        mNewItemText.setText(pastNotioliText);
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                ContentValues values = new ContentValues();
-                values.put(Task.NOTIOLI_COLUMN_TITLE, mNewItemText.getText().toString());
-                db.update(Task.TABLE_NOTIOLI, values, Task.NOTIOLI_COLUMN_TITLE + " = '" + pastNotioliText + "'" , null);
-                updateUI();
-                closeKeyboard();
-            }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                closeKeyboard();
-            }
-        }).setTitle("Edit");
-        builder.setView(newNoteBaseLayout);
-        return builder;
-    }
-    public void editNotioli(View v) {
-        View parent = (View) v.getParent();
-        TextView taskTextView = (TextView) parent.findViewById(R.id.notioli_title);
-        String notioli = taskTextView.getText().toString();
-        pastNotioliText = notioli;
-        AlertDialog.Builder builder = getDialog();
-        AlertDialog alertToShow = builder.create();
-        alertToShow.getWindow().setSoftInputMode(
-                WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-        alertToShow.show();
-    }
-
     public void goHome(View v){
         Intent i = new Intent();
         i.putExtra("message","You visited notioli");
@@ -178,69 +110,15 @@ public class Notioli extends AppCompatActivity {
         finish();
     }
 
-    private void closeKeyboard() {
-
-        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(mNewItemText.getWindowToken(), 0);
-    }
     //////////////////////
     //Image
 
-    public void savePicture(View v){
-        viewForCurrentImage = (View) v.getParent();
-        if(Build.VERSION.SDK_INT >= 23 &&
-                checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                        != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    STORAGE_PERMISSION);
-        }
-        else{
-            takePicturePermitted();
-        }
-    }
-
-    public void takePicturePermitted(){
-        Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if(i.resolveActivity(getPackageManager()) != null){
-            File photo = null;
-            try{
-                String time = new SimpleDateFormat("yyyMMdd-HHmmss").format(new Date());
-                String name  = "IMAGE_"+time;
-                File directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-                photo = File.createTempFile(name, ".jpg", directory);
-                Log.d("PHOTO!", photo.getAbsolutePath());
-                lastImageURI = photo.getAbsolutePath();
-            }catch(IOException ioe){
-                ioe.printStackTrace();
-            }
-            if(photo != null){
-                Log.d("PHOTO?", "Taking photo");
-                //Uri photoURI = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", createImageFile());
-                i.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getPackageName() + ".provider", photo));
-                Log.d("PHOTO?", "Putting extra");
-                startActivityForResult(i, SAVE_PICTURE);
-            }
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        if(requestCode == STORAGE_PERMISSION && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-            takePicturePermitted();
-        }
-    }
-
-    public void saveImageDB(){
-        TextView title = (TextView) viewForCurrentImage.findViewById(R.id.notioli_title);
-        String titleForPhoto = title.getText().toString();
+    public void savePictureDB(String title, String path){
         SQLiteDatabase db = mNotioliHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(Task.NOTIOLI_COLUMN_IMAGE, lastImageURI);
+        contentValues.put(Task.NOTIOLI_COLUMN_IMAGE, path);
         String clause = Task.NOTIOLI_COLUMN_TITLE + " = ?";
-        String[] values = {titleForPhoto};
+        String[] values = {title};
         db.update(Task.TABLE_NOTIOLI, contentValues, clause, values);
         db.close();
     }
@@ -249,12 +127,30 @@ public class Notioli extends AppCompatActivity {
     public void onActivityResult(int req, int res, Intent data){
         if(res == Activity.RESULT_OK){
             switch(req){
-                case SAVE_PICTURE:
-                    Log.d("REGRESO", "REGRESAMOS!");
-                    saveImageDB();
+                case DETAILED_NOTIOLI:
+                    String task = data.getStringExtra("text");
+                    String old = data.getStringExtra("old");
+                    String image = data.getStringExtra("image");
+                    savePictureDB(old, image);
+                    SQLiteDatabase db = mNotioliHelper.getWritableDatabase();
+                    ContentValues values = new ContentValues();
+                    values.put(Task.NOTIOLI_COLUMN_TITLE, task);
+                    String clause = Task.NOTIOLI_COLUMN_TITLE + " = ?";
+                    db.update(Task.TABLE_NOTIOLI, values, clause, new String[] {old});
+                    db.close();
                     updateUI();
-                    break;
             }
         }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Nota nota = mAdapter.getItem(position);
+        String text = nota.getTitle();
+        String image_path = nota.getImage();
+        Intent i = new Intent(this, DetailedNote.class);
+        i.putExtra("text",text);
+        i.putExtra("image",image_path);
+        startActivityForResult(i, DETAILED_NOTIOLI);
     }
 }

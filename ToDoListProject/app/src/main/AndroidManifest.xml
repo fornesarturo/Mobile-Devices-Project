@@ -36,7 +36,6 @@
         <provider
             android:name=".contentprovider.NoteContentProvider"
             android:authorities="watsalacanoa.todolisttest.contentprovider" />
-
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -44,7 +43,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"/>
+                android:resource="@xml/provider_paths" />
         </provider>
 
         <activity
@@ -76,7 +75,8 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps" />
+        <activity android:name=".DetailedNote"></activity>
     </application>
 
 </manifest>
