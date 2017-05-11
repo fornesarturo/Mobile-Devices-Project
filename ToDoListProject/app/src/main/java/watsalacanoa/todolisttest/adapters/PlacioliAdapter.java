@@ -16,6 +16,7 @@ public class PlacioliAdapter extends BaseAdapter {
     private ArrayList<Placioli> places;
     private Activity activity;
 
+    public PlacioliAdapter() {}
     public PlacioliAdapter(ArrayList<Placioli> places, Activity activity){
         this.places = places;
         this.activity = activity;
